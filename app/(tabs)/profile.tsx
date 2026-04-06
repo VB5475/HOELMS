@@ -15,10 +15,14 @@ import { useAuth } from "../../context/AuthContext";
 import { useCourses } from "../../context/CourseContext";
 
 export default function ProfileScreen() {
+ const [shouldCrash, setShouldCrash] = React.useState(false);
  const { user, logout } = useAuth();
  const { savedCourses, enrolled } = useCourses();
+  if (shouldCrash) {
+   throw new Error("Demo JS render crash!");
+  }
 
- function handleLogout() {
+  function handleLogout() {
   Alert.alert("Log out", "Are you sure you want to log out?", [
    { text: "Cancel", style: "cancel" },
    { text: "Log out", style: "destructive", onPress: logout },
@@ -104,7 +108,7 @@ export default function ProfileScreen() {
   <TouchableOpacity
     className="bg-indigo-100 border border-indigo-200 rounded-2xl py-4 items-center flex-row justify-center gap-2"
     activeOpacity={0.8}
-    onPress={() => { throw new Error("Demo crash!"); }}>
+    onPress={() => setShouldCrash(true)}>
     <Ionicons name="warning-outline" size={20} color="#4f46e5" />
     <Text className="text-indigo-600 font-semibold">Crash App</Text>
   </TouchableOpacity>

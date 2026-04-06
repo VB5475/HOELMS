@@ -7,7 +7,7 @@ interface Props {
  children: React.ReactNode;
 }
 
-function FallbackUI() {
+export function FallbackUI() {
  return (
   <View
    style={{

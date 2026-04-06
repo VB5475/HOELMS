@@ -1,9 +1,9 @@
 import * as Sentry from '@sentry/react-native';
-import { Stack, router, useSegments } from "expo-router";
+import { ErrorBoundaryProps, Stack, router, useSegments } from "expo-router";
 import { StatusBar } from "expo-status-bar";
 import React, { useEffect } from "react";
 import { ActivityIndicator, View } from "react-native";
-import ErrorBoundaryWrapper from "../components/ErrorBoundaryWrapper";
+import ErrorBoundaryWrapper, { FallbackUI } from "../components/ErrorBoundaryWrapper";
 import { AuthProvider, useAuth } from "../context/AuthContext";
 import { CourseProvider } from "../context/CourseContext";
 import "../global.css";
@@ -58,6 +58,14 @@ function AuthGuard({ children }: { children: React.ReactNode }) {
  }
 
  return <>{children}</>;
+}
+
+export function ErrorBoundary({ error, retry }: ErrorBoundaryProps) {
+ useEffect(() => {
+  Sentry.captureException(error);
+ }, [error]);
+
+ return <FallbackUI />;
 }
 
 export default function RootLayout() {
