@@ -1,12 +1,14 @@
 import { Ionicons } from "@expo/vector-icons";
+import * as Sentry from "@sentry/react-native";
+import { router } from "expo-router";
 import React from "react";
 import {
- Alert,
- Image,
- ScrollView,
- Text,
- TouchableOpacity,
- View,
+    Alert,
+    Image,
+    ScrollView,
+    Text,
+    TouchableOpacity,
+    View,
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useAuth } from "../../context/AuthContext";
@@ -72,7 +74,7 @@ export default function ProfileScreen() {
 
     {/* menu items */}
     <View className="mx-4 mt-6 bg-white rounded-2xl overflow-hidden border border-gray-100">
-     <MenuItem icon="person-outline" label="Edit Profile" onPress={() => {}} />
+     <MenuItem icon="color-palette-outline" label="App Icon" onPress={() => router.push("/settings")} />
      <View className="h-px bg-gray-50 ml-14" />
      <MenuItem
       icon="notifications-outline"
@@ -89,15 +91,33 @@ export default function ProfileScreen() {
      />
     </View>
 
-    <View className="mx-4 mt-4 mb-10">
-     <TouchableOpacity
-      onPress={handleLogout}
-      className="bg-red-50 border border-red-100 rounded-2xl py-4 items-center flex-row justify-center gap-2"
-      activeOpacity={0.8}>
-      <Ionicons name="log-out-outline" size={20} color="#ef4444" />
-      <Text className="text-red-500 font-semibold">Log out</Text>
-     </TouchableOpacity>
-    </View>
+   <View className="mx-4 mt-4 mb-10 gap-2">
+
+  <TouchableOpacity
+    className="bg-indigo-50 border border-indigo-100 rounded-2xl py-4 items-center flex-row justify-center gap-2"
+    activeOpacity={0.8}
+    onPress={() => Sentry.nativeCrash()}>
+    <Ionicons name="skull-outline" size={20} color="#6366f1" />
+    <Text className="text-indigo-500 font-semibold">Native Crash</Text>
+  </TouchableOpacity>
+
+  <TouchableOpacity
+    className="bg-indigo-100 border border-indigo-200 rounded-2xl py-4 items-center flex-row justify-center gap-2"
+    activeOpacity={0.8}
+    onPress={() => { throw new Error("Demo crash!"); }}>
+    <Ionicons name="warning-outline" size={20} color="#4f46e5" />
+    <Text className="text-indigo-600 font-semibold">Crash App</Text>
+  </TouchableOpacity>
+
+  <TouchableOpacity
+    onPress={handleLogout}
+    className="bg-red-50 border border-red-100 rounded-2xl py-4 items-center flex-row justify-center gap-2"
+    activeOpacity={0.8}>
+    <Ionicons name="log-out-outline" size={20} color="#ef4444" />
+    <Text className="text-red-500 font-semibold">Log out</Text>
+  </TouchableOpacity>
+
+</View>
    </ScrollView>
   </SafeAreaView>
  );

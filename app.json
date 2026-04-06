@@ -63,6 +63,40 @@
           "color": "#6366f1",
           "sounds": []
         }
+      ],
+      [
+        "@sentry/react-native/expo",
+        {
+          "url": "https://sentry.io/",
+          "project": "react-native",
+          "organization": "vatsal-bhatti"
+        }
+      ],
+      [
+        "@howincodes/expo-dynamic-app-icon",
+        {
+          "dark": {
+            "ios": "./assets/icons/dark.png",
+            "android": {
+              "foregroundImage": "./assets/icons/dark.png",
+              "backgroundColor": "#1e293b"
+            }
+          },
+          "green": {
+            "ios": "./assets/icons/green.png",
+            "android": {
+              "foregroundImage": "./assets/icons/green.png",
+              "backgroundColor": "#059669"
+            }
+          },
+          "red": {
+            "ios": "./assets/icons/red.png",
+            "android": {
+              "foregroundImage": "./assets/icons/red.png",
+              "backgroundColor": "#e11d48"
+            }
+          }
+        }
       ]
     ],
     "experiments": {

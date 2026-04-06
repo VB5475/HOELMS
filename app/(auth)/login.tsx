@@ -2,14 +2,14 @@ import { Ionicons } from "@expo/vector-icons";
 import { router } from "expo-router";
 import React, { useEffect, useState } from "react";
 import {
- ActivityIndicator,
- KeyboardAvoidingView,
- Platform,
- ScrollView,
- Text,
- TextInput,
- TouchableOpacity,
- View,
+    ActivityIndicator,
+    KeyboardAvoidingView,
+    Platform,
+    ScrollView,
+    Text,
+    TextInput,
+    TouchableOpacity,
+    View,
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useAuth } from "../../context/AuthContext";
@@ -39,8 +39,7 @@ export default function LoginScreen() {
   if (ok) router.replace("/(tabs)");
  }
 
- const errMsg = localErr || error;
-
+  const errMsg = localErr || error;
  return (
   <SafeAreaView className="flex-1 bg-white" edges={["top", "bottom"]}>
    <KeyboardAvoidingView

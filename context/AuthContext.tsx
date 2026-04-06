@@ -1,4 +1,5 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import * as Sentry from "@sentry/react-native";
 import * as SecureStore from "expo-secure-store";
 import React, {
  createContext,
@@ -116,6 +117,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     dispatch({ type: "SET_USER", payload: user });
     await AsyncStorage.setItem("lastLogin", new Date().toISOString());
     await AsyncStorage.setItem("cachedUser", JSON.stringify(user));
+     Sentry.setUser({ id: user._id, email: user.email, username: user.username });
    } else {
     dispatch({ type: "SET_LOADING", payload: false });
    }
@@ -246,6 +248,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   await SecureStore.deleteItemAsync("accessToken").catch(() => {});
   await SecureStore.deleteItemAsync("refreshToken").catch(() => {});
   dispatch({ type: "LOGOUT" });
+   Sentry.setUser(null);
  }, []);
 
  const clearError = useCallback(() => {

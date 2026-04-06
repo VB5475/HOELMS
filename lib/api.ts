@@ -1,3 +1,4 @@
+import * as Sentry from "@sentry/react-native";
 import * as SecureStore from "expo-secure-store";
 import { ApiResponse } from "../types";
 
@@ -70,6 +71,10 @@ async function apiCall<T>(
    }
    if (attempt < retries) {
     await wait(1000 * (attempt + 1));
+   } else {
+    Sentry.captureException(err, {
+     extra: { endpoint, attempt, retries },
+    });
    }
   }
  }
